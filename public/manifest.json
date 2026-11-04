@@ -1,0 +1,17 @@
+{
+  "short_name": "Vyopic",
+  "name": "Vyopic - Free Online Photo Tools",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "display": "standalone",
+  "description": "Fast, free, and private online photo tools in your browser."
+}

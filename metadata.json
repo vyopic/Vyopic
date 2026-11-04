@@ -1,0 +1,6 @@
+{
+  "name": "Vyopic - Free Online Photo Tools",
+  "description": "Fast, free, and privacy-focused online photo editing tools in your browser. Compress, resize, convert, crop, passport photo maker, collage maker, filters, and more.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
