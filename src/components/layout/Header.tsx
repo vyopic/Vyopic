@@ -66,10 +66,10 @@ export const Header: React.FC = () => {
             {isToolsDropdownOpen && (
               <div
                 onMouseLeave={() => setIsToolsDropdownOpen(false)}
-                className="absolute top-full left-0 w-80 bg-white border border-slate-200 rounded-2xl shadow-xl p-3 grid grid-cols-1 gap-1 z-50 animate-in fade-in duration-150"
+                className="absolute top-full left-0 w-96 max-h-[480px] overflow-y-auto bg-white border border-slate-200 rounded-2xl shadow-xl p-3 grid grid-cols-1 gap-1 z-50 animate-in fade-in duration-150"
               >
-                <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                  All 10 Free Tools
+                <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider sticky top-0 bg-white/95 backdrop-blur-xs">
+                  All 20 Free Photo Tools ({TOOLS.length})
                 </div>
                 {TOOLS.map((tool) => (
                   <button
@@ -79,9 +79,16 @@ export const Header: React.FC = () => {
                   >
                     <div className="w-2 h-2 rounded-full bg-blue-600 mt-2 shrink-0 group-hover:scale-125 transition-transform" />
                     <div>
-                      <p className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                        {tool.title}
-                      </p>
+                      <div className="flex items-center gap-1.5">
+                        <p className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
+                          {tool.title}
+                        </p>
+                        {tool.badge && (
+                          <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 bg-blue-100 text-blue-700 rounded">
+                            {tool.badge}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-[11px] text-slate-400 line-clamp-1">
                         {tool.shortDescription}
                       </p>
@@ -168,9 +175,9 @@ export const Header: React.FC = () => {
             </Link>
           </div>
 
-          <div className="pt-2 border-t border-slate-100">
+          <div className="pt-2 border-t border-slate-100 max-h-80 overflow-y-auto">
             <p className="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-              All 10 Photo Tools
+              All 20 Photo Tools
             </p>
             <div className="grid grid-cols-1 gap-1">
               {TOOLS.map((t) => (

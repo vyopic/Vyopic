@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
               Online Photo Tools
             </h3>
             <ul className="space-y-2 text-xs font-medium">
-              {TOOLS.slice(0, 5).map((t) => (
+              {TOOLS.slice(0, 10).map((t) => (
                 <li key={t.id}>
                   <Link to={t.path} className="hover:text-blue-600 transition-colors">
                     {t.title}
@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
               More Image Utilities
             </h3>
             <ul className="space-y-2 text-xs font-medium">
-              {TOOLS.slice(5, 10).map((t) => (
+              {TOOLS.slice(10, 20).map((t) => (
                 <li key={t.id}>
                   <Link to={t.path} className="hover:text-blue-600 transition-colors">
                     {t.title}

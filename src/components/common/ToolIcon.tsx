@@ -10,6 +10,16 @@ import {
   RotateCw,
   Palette,
   FlipHorizontal,
+  Scissors,
+  Sparkles,
+  Wand2,
+  FileText,
+  FileImage,
+  Stamp,
+  Eraser,
+  Smile,
+  Info,
+  QrCode,
   Image as ImageIcon
 } from 'lucide-react';
 
@@ -40,6 +50,26 @@ export const ToolIcon: React.FC<ToolIconProps> = ({ name, className = 'w-6 h-6' 
       return <Palette className={className} />;
     case 'FlipHorizontal':
       return <FlipHorizontal className={className} />;
+    case 'Scissors':
+      return <Scissors className={className} />;
+    case 'Sparkles':
+      return <Sparkles className={className} />;
+    case 'Wand2':
+      return <Wand2 className={className} />;
+    case 'FileText':
+      return <FileText className={className} />;
+    case 'FileImage':
+      return <FileImage className={className} />;
+    case 'Stamp':
+      return <Stamp className={className} />;
+    case 'Eraser':
+      return <Eraser className={className} />;
+    case 'Smile':
+      return <Smile className={className} />;
+    case 'Info':
+      return <Info className={className} />;
+    case 'QrCode':
+      return <QrCode className={className} />;
     default:
       return <ImageIcon className={className} />;
   }

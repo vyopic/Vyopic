@@ -255,5 +255,250 @@ export const TOOLS: ToolItem[] = [
         answer: 'Selfies taken on mobile phones are often saved as inverted mirror images. Flipping horizontally restores the natural perspective.'
       }
     ]
+  },
+
+  // 10 NEW FEATURES
+  {
+    id: 'background-remover',
+    title: 'AI Background Remover',
+    shortDescription: 'Remove photo backgrounds automatically and create transparent PNGs.',
+    fullDescription: 'Isolate subjects and automatically remove background clutter from portraits, products, and graphics. Fast, 100% private in-browser edge detection with tolerance adjustments.',
+    path: '/background-remover',
+    iconName: 'Scissors',
+    badge: 'AI Powered',
+    keywords: ['background remover', 'ai background removal', 'transparent background png', 'cutout image online', 'remove bg free'],
+    metaTitle: 'Free Online AI Background Remover – Transparent PNG Cutouts | Vyopic',
+    metaDescription: 'Remove photo backgrounds automatically in your browser. Create transparent PNG cutouts for portraits and product photos with zero server upload.',
+    features: [
+      'Smart edge and color segmentation engine',
+      'Color keying and tolerance threshold controls',
+      'Feathering and edge smoothing for natural results',
+      'Download clean high-resolution transparent PNG'
+    ],
+    faqs: [
+      {
+        question: 'Are my photos uploaded to an AI cloud server?',
+        answer: 'No. The intelligent segmentation runs directly inside your web browser on your device, ensuring maximum privacy.'
+      },
+      {
+        question: 'Can I choose which color to remove?',
+        answer: 'Yes! You can auto-detect the background color or click any sample point on the photo to isolate and erase.'
+      }
+    ]
+  },
+  {
+    id: 'image-upscaler',
+    title: 'AI Image Upscaler',
+    shortDescription: 'Upscale low-resolution photos to 2x or 4x without pixelation.',
+    fullDescription: 'Enhance image fidelity and upscale low-resolution photos up to 400%. Uses high-precision bicubic interpolation and edge sharpening algorithms locally.',
+    path: '/image-upscaler',
+    iconName: 'Sparkles',
+    badge: 'New',
+    keywords: ['image upscaler', 'ai image upscaler', 'enlarge photo without quality loss', 'increase image resolution', 'photo upscaler online'],
+    metaTitle: 'Free Online AI Image Upscaler – Enlarge Photos 2x & 4x | Vyopic',
+    metaDescription: 'Upscale low-resolution images 2x and 4x online for free. Sharpen edges, reduce artifacts, and boost clarity in your browser.',
+    features: [
+      '2x (200%) and 4x (400%) scaling options',
+      'Adaptive edge sharpening and detail recovery',
+      'Noise suppression and smoothing',
+      'Side-by-side zoomed comparison'
+    ],
+    faqs: [
+      {
+        question: 'What is the maximum upscale resolution?',
+        answer: 'You can upscale photos up to 4x (400%) of original width and height while maintaining crisp details.'
+      }
+    ]
+  },
+  {
+    id: 'photo-enhancer',
+    title: 'AI Photo Enhancer',
+    shortDescription: 'One-click auto-enhance to balance lighting, colors, and sharpness.',
+    fullDescription: 'Instantly revitalize dull photos. Automatically calculates optimal histogram levels, dynamic contrast, vibrance, tone warmth, and edge clarity.',
+    path: '/photo-enhancer',
+    iconName: 'Wand2',
+    badge: 'Popular',
+    keywords: ['photo enhancer', 'ai photo enhancer', 'auto enhance image', 'fix dark photo', 'improve photo quality'],
+    metaTitle: 'Free Online AI Photo Enhancer – Auto Balance & Enhance Photos | Vyopic',
+    metaDescription: 'Auto-enhance lighting, colors, sharpness and contrast in 1-click. Fix underexposed and washed out photos instantly in your browser.',
+    features: [
+      'One-click intelligent auto balance',
+      'Smart exposure and shadow recovery',
+      'Clarity, vibrance, and micro-contrast boost',
+      'Interactive before/after comparison slider'
+    ],
+    faqs: [
+      {
+        question: 'How does the auto enhancer work?',
+        answer: 'It analyzes the color histogram of your image to expand dynamic range, lift crushed shadows, and sharpen soft edges.'
+      }
+    ]
+  },
+  {
+    id: 'image-to-pdf',
+    title: 'Image to PDF Converter',
+    shortDescription: 'Convert one or multiple images into a clean, printable PDF document.',
+    fullDescription: 'Merge single or multiple photos (JPG, PNG, WebP) into an organized PDF document. Customize page orientation, paper size (A4, Letter), and margins.',
+    path: '/image-to-pdf',
+    iconName: 'FileText',
+    badge: 'Productivity',
+    keywords: ['image to pdf', 'convert jpg to pdf', 'png to pdf converter', 'combine photos to pdf', 'photo to pdf free'],
+    metaTitle: 'Free Online Image to PDF Converter – Combine Photos to PDF | Vyopic',
+    metaDescription: 'Convert JPG, PNG, and WebP images to PDF document online. Set A4/Letter size, page margins, and download high-quality PDFs instantly.',
+    features: [
+      'Multi-image batch support (re-order, add, remove)',
+      'Page formats: A4, Letter, Fit to Image',
+      'Portrait and Landscape page orientation',
+      'Custom margin spacing (None, Small, Normal)'
+    ],
+    faqs: [
+      {
+        question: 'Can I combine multiple pictures into one PDF file?',
+        answer: 'Yes! Upload multiple images at once and generate a single multi-page PDF document.'
+      }
+    ]
+  },
+  {
+    id: 'pdf-to-image',
+    title: 'PDF to Image Converter',
+    shortDescription: 'Extract and render PDF pages as high-resolution JPG or PNG images.',
+    fullDescription: 'Convert PDF documents into separate crisp image files. Preview all pages, choose rendering DPI resolution, and download single pages or all images.',
+    path: '/pdf-to-image',
+    iconName: 'FileImage',
+    badge: 'Utility',
+    keywords: ['pdf to image', 'convert pdf to jpg', 'pdf to png online', 'extract images from pdf', 'pdf page to picture'],
+    metaTitle: 'Free Online PDF to Image Converter – Convert PDF to JPG & PNG | Vyopic',
+    metaDescription: 'Convert PDF pages to high-resolution JPG and PNG images online. Completely private in-browser rendering with zero server upload.',
+    features: [
+      'Client-side PDF rendering with PDF.js',
+      'Export pages as JPG or PNG',
+      'Choose output quality and zoom scale (1x, 2x, 3x)',
+      'Preview all pages with one-click individual or batch downloads'
+    ],
+    faqs: [
+      {
+        question: 'Are my confidential PDF documents safe?',
+        answer: '100% safe! PDF documents are parsed in your browser memory and are never uploaded to any remote server.'
+      }
+    ]
+  },
+  {
+    id: 'image-watermark',
+    title: 'Image Watermark Maker',
+    shortDescription: 'Add custom text or logo watermarks with opacity and position controls.',
+    fullDescription: 'Protect your original photography and copyright. Add customizable text watermarks, logo stamps, tile repeat patterns, opacity controls, and custom fonts.',
+    path: '/image-watermark',
+    iconName: 'Stamp',
+    keywords: ['image watermark maker', 'add watermark to photo', 'watermark photo online', 'protect photo copyright', 'stamp logo on image'],
+    metaTitle: 'Free Online Image Watermark Maker – Protect Photos with Watermarks | Vyopic',
+    metaDescription: 'Add custom text and logo watermarks to your photos online. Control opacity, font size, rotation, 9-point placement, or tile grid patterns.',
+    features: [
+      'Text watermark with custom font, color, size, and rotation',
+      'Logo image watermark stamp overlay',
+      '9-point grid alignment (center, corners, edges) or full tile repeat',
+      'Smooth opacity slider (0% to 100%)'
+    ],
+    faqs: [
+      {
+        question: 'Can I add a repeating tiled watermark across the entire photo?',
+        answer: 'Yes! Select the "Tile / Pattern" mode to repeat your text or logo watermark diagonally across the whole picture.'
+      }
+    ]
+  },
+  {
+    id: 'object-remover',
+    title: 'AI Object Remover',
+    shortDescription: 'Brush over unwanted objects, people, or blemishes to erase them.',
+    fullDescription: 'Erase tourists, telephone wires, unwanted objects, or skin blemishes with an interactive eraser brush that blends surrounding pixel textures.',
+    path: '/object-remover',
+    iconName: 'Eraser',
+    badge: 'Magic',
+    keywords: ['object remover', 'ai object remover', 'erase unwanted object from photo', 'remove person from photo', 'photo blemish eraser'],
+    metaTitle: 'Free Online AI Object Remover – Erase Unwanted Objects | Vyopic',
+    metaDescription: 'Brush over and erase unwanted objects, wires, text, or photobombers from your pictures. Free client-side texture inpainting.',
+    features: [
+      'Interactive brush canvas with size and feather sliders',
+      'Smart content-aware inpainting using neighborhood sampling',
+      'Undo/Redo mask brush history',
+      'Instant before & after comparison'
+    ],
+    faqs: [
+      {
+        question: 'How do I erase an object from a photo?',
+        answer: 'Upload your photo, adjust the brush size, paint over the unwanted object, and click "Erase Object".'
+      }
+    ]
+  },
+  {
+    id: 'meme-generator',
+    title: 'Meme Generator',
+    shortDescription: 'Create viral memes with top and bottom impact text or modern templates.',
+    fullDescription: 'Design funny memes in seconds. Add classic bold impact top/bottom text with black outlines, customize text colors, or choose popular meme templates.',
+    path: '/meme-generator',
+    iconName: 'Smile',
+    badge: 'Fun',
+    keywords: ['meme generator', 'online meme maker', 'create meme free', 'impact font meme', 'custom photo meme'],
+    metaTitle: 'Free Online Meme Generator – Create Funny Memes Instantly | Vyopic',
+    metaDescription: 'Create custom viral memes online with classic top/bottom impact text, custom stickers, text styles, and instant high-res image download.',
+    features: [
+      'Top and Bottom text fields with uppercase toggle',
+      'Custom font size, color, stroke outline thickness',
+      'Includes classic meme starter templates or upload your own',
+      'Direct social media ready JPG/PNG export'
+    ],
+    faqs: [
+      {
+        question: 'Can I upload my own pictures for memes?',
+        answer: 'Yes! You can upload any personal photo or choose from built-in popular blank templates.'
+      }
+    ]
+  },
+  {
+    id: 'image-metadata',
+    title: 'Image Metadata Viewer',
+    shortDescription: 'View and inspect EXIF metadata, camera info, resolution, and GPS data.',
+    fullDescription: 'Inspect hidden details in your photos including camera make, model, lens, shutter speed, ISO, aperture, dimensions, color space, file size, and creation date.',
+    path: '/image-metadata',
+    iconName: 'Info',
+    badge: 'Inspect',
+    keywords: ['image metadata viewer', 'exif data viewer online', 'view photo metadata', 'camera info inspector', 'photo date and resolution'],
+    metaTitle: 'Free Online Image Metadata & EXIF Viewer | Vyopic',
+    metaDescription: 'View hidden EXIF metadata, camera settings, lens model, date created, resolution, color space, and technical properties of your photos.',
+    features: [
+      'Detailed EXIF header parser (Camera, Lens, ISO, Aperture, Exposure)',
+      'Image technical properties (Width, Height, Aspect Ratio, Megapixels, Color Type)',
+      'Export metadata as JSON or text report',
+      'Option to export clean copy with all EXIF metadata stripped for privacy'
+    ],
+    faqs: [
+      {
+        question: 'Can I strip metadata from my photos for privacy?',
+        answer: 'Yes! Our tool allows you to save a cleaned version of your photo with all identifying EXIF and GPS tags removed.'
+      }
+    ]
+  },
+  {
+    id: 'qr-code-generator',
+    title: 'QR Code Image Generator',
+    shortDescription: 'Generate custom QR code images for URLs, text, Wi-Fi, and contacts.',
+    fullDescription: 'Create crisp, high-resolution QR codes for websites, plain text, Wi-Fi passwords, emails, and phone numbers. Customize foreground and background colors.',
+    path: '/qr-code-generator',
+    iconName: 'QrCode',
+    badge: 'Utility',
+    keywords: ['qr code generator', 'create qr code online', 'custom qr code maker', 'wifi qr code', 'high resolution qr code'],
+    metaTitle: 'Free Online QR Code Image Generator – Custom Colors & High Res | Vyopic',
+    metaDescription: 'Generate custom high-resolution QR code images for links, text, and Wi-Fi. Customize colors, error correction, and download PNG/SVG.',
+    features: [
+      'Support for URLs, Text, Wi-Fi, Phone, Email, and SMS',
+      'Custom foreground and background color pickers',
+      'Configurable error correction levels (Low, Medium, Quartile, High)',
+      'Export as high-resolution PNG or SVG vector'
+    ],
+    faqs: [
+      {
+        question: 'Do the generated QR codes expire?',
+        answer: 'No! These are standard static QR codes that contain your data directly and never expire.'
+      }
+    ]
   }
 ];

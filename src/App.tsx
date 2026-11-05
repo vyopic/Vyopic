@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 
+// First 10 Core Pages
 import { Home } from './pages/Home';
 import { ImageCompressorPage } from './pages/ImageCompressor';
 import { ImageResizerPage } from './pages/ImageResizer';
@@ -15,6 +16,19 @@ import { ImageRotatorPage } from './pages/ImageRotator';
 import { BackgroundColorChangerPage } from './pages/BackgroundColorChanger';
 import { ImageFlipperPage } from './pages/ImageFlipper';
 
+// 10 New Features
+import { BackgroundRemoverPage } from './pages/BackgroundRemover';
+import { ImageUpscalerPage } from './pages/ImageUpscaler';
+import { PhotoEnhancerPage } from './pages/PhotoEnhancer';
+import { ImageToPdfPage } from './pages/ImageToPdf';
+import { PdfToImagePage } from './pages/PdfToImage';
+import { ImageWatermarkPage } from './pages/ImageWatermark';
+import { ObjectRemoverPage } from './pages/ObjectRemover';
+import { MemeGeneratorPage } from './pages/MemeGenerator';
+import { ImageMetadataPage } from './pages/ImageMetadata';
+import { QrCodeGeneratorPage } from './pages/QrCodeGenerator';
+
+// Legal & Info Pages
 import { AboutPage } from './pages/About';
 import { ContactPage } from './pages/Contact';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicy';
@@ -40,6 +54,8 @@ export default function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            
+            {/* First 10 Tools */}
             <Route path="/image-compressor" element={<ImageCompressorPage />} />
             <Route path="/image-resizer" element={<ImageResizerPage />} />
             <Route path="/image-converter" element={<ImageConverterPage />} />
@@ -51,12 +67,26 @@ export default function App() {
             <Route path="/background-color-changer" element={<BackgroundColorChangerPage />} />
             <Route path="/image-flipper" element={<ImageFlipperPage />} />
 
+            {/* 10 New Tools */}
+            <Route path="/background-remover" element={<BackgroundRemoverPage />} />
+            <Route path="/image-upscaler" element={<ImageUpscalerPage />} />
+            <Route path="/photo-enhancer" element={<PhotoEnhancerPage />} />
+            <Route path="/image-to-pdf" element={<ImageToPdfPage />} />
+            <Route path="/pdf-to-image" element={<PdfToImagePage />} />
+            <Route path="/image-watermark" element={<ImageWatermarkPage />} />
+            <Route path="/object-remover" element={<ObjectRemoverPage />} />
+            <Route path="/meme-generator" element={<MemeGeneratorPage />} />
+            <Route path="/image-metadata" element={<ImageMetadataPage />} />
+            <Route path="/qr-code-generator" element={<QrCodeGeneratorPage />} />
+            <Route path="/qr-code-generato" element={<QrCodeGeneratorPage />} />
+
+            {/* Legal Pages */}
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
 
-            {/* Fallback redirect */}
+            {/* Fallback */}
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
