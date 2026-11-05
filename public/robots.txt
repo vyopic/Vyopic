@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vyopic.com/sitemap.xml
+Sitemap: https://vyopic.pages.dev/sitemap.xml

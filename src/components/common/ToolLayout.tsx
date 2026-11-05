@@ -20,7 +20,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
         title={tool.metaTitle}
         description={tool.metaDescription}
         keywords={tool.keywords}
-        canonicalUrl={`https://vyopic.com${tool.path}`}
+        canonicalUrl={`https://vyopic.pages.dev${tool.path}`}
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
