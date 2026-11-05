@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
                 className="absolute top-full left-0 w-96 max-h-[480px] overflow-y-auto bg-white border border-slate-200 rounded-2xl shadow-xl p-3 grid grid-cols-1 gap-1 z-50 animate-in fade-in duration-150"
               >
                 <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider sticky top-0 bg-white/95 backdrop-blur-xs">
-                  All 20 Free Photo Tools ({TOOLS.length})
+                  All Photo Tools ({TOOLS.length})
                 </div>
                 {TOOLS.map((tool) => (
                   <button
@@ -177,7 +177,7 @@ export const Header: React.FC = () => {
 
           <div className="pt-2 border-t border-slate-100 max-h-80 overflow-y-auto">
             <p className="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-              All 20 Photo Tools
+              All Photo Tools ({TOOLS.length})
             </p>
             <div className="grid grid-cols-1 gap-1">
               {TOOLS.map((t) => (

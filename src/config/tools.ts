@@ -500,5 +500,108 @@ export const TOOLS: ToolItem[] = [
         answer: 'No! These are standard static QR codes that contain your data directly and never expire.'
       }
     ]
+  },
+
+  // 4 NEW REQUESTED FEATURES
+  {
+    id: 'ai-profile-picture',
+    title: 'AI Profile Picture Maker',
+    shortDescription: 'Create professional avatars & profile pictures with background styles and frames.',
+    fullDescription: 'Transform any selfie or portrait into high-converting avatars for LinkedIn, Business, Gaming, Instagram, and Creative portfolios. Choose from curated aesthetic backgrounds, circular frames, lighting effects, and color themes.',
+    path: '/ai-profile-picture',
+    iconName: 'User',
+    badge: 'Popular',
+    keywords: ['profile picture maker', 'ai pfp maker', 'linkedin avatar generator', 'gaming avatar', 'instagram profile photo', 'professional headshot maker'],
+    metaTitle: 'Free AI Profile Picture Maker – Professional Avatars & PFP | Vyopic',
+    metaDescription: 'Create professional profile pictures for LinkedIn, Instagram, Gaming, and Business online for free. Custom backgrounds, frames, lighting, and HD download.',
+    features: [
+      'Categories: Professional, Business, Gaming, Facebook, Instagram, LinkedIn, Creative',
+      'Curated ready-made gradient & solid backdrop styles',
+      'Circular, rounded square & neon ring aesthetic frames',
+      'Fine-tuned background contrast, saturation, and blur adjustments',
+      '100% private in-browser HD avatar export'
+    ],
+    faqs: [
+      {
+        question: 'Are my uploaded selfies safe?',
+        answer: 'Yes! Vyopic processes everything inside your local web browser using HTML5 Canvas. Your photos are never sent to external servers or stored.'
+      },
+      {
+        question: 'What sizes are the generated profile pictures?',
+        answer: 'The avatars are exported in 1:1 HD square format (1000x1000px), perfect for LinkedIn, Instagram, Discord, and Google accounts.'
+      }
+    ]
+  },
+  {
+    id: 'photo-to-sketch',
+    title: 'AI Photo to Sketch',
+    shortDescription: 'Convert photos into artistic pencil sketches, colored drawings & portraits.',
+    fullDescription: 'Turn your pictures into handcrafted artwork in seconds. Choose from Pencil Sketch, Color Sketch, Portrait Sketch, Cartoon Sketch, and Black & White artistic drawing styles with intensity tuning.',
+    path: '/photo-to-sketch',
+    iconName: 'Pencil',
+    badge: 'Artistic',
+    keywords: ['photo to sketch', 'ai sketch maker', 'pencil sketch effect online', 'turn photo into drawing', 'convert image to sketch free'],
+    metaTitle: 'Free AI Photo to Sketch Converter – Pencil, Color & Portrait Sketch | Vyopic',
+    metaDescription: 'Convert photos to pencil sketch, color sketch, portrait sketch, and cartoon drawings online for free with real-time Before & After comparison.',
+    features: [
+      '5 Artistic Sketch Modes: Pencil, Color, Portrait, Cartoon, Black & White',
+      'Interactive effect intensity & edge detail sliders',
+      'Hold-to-view Before & After comparison',
+      'One-click instant HD sketch download'
+    ],
+    faqs: [
+      {
+        question: 'How does the sketch conversion work?',
+        answer: 'Our algorithm performs edge detection, color desaturation, color dodge inversion, and contrast mapping in your browser to simulate authentic pencil strokes.'
+      }
+    ]
+  },
+  {
+    id: 'ai-photo-booth',
+    title: 'AI Photo Booth',
+    shortDescription: 'Style your pictures with retro film, vintage photobooth frames & themes.',
+    fullDescription: 'Bring the fun of classic and modern photo booths to your browser! Choose from Vintage, Passport, Professional, Funny, Cartoon, Retro, and Artistic photo booth themes with realistic multi-strip frames.',
+    path: '/ai-photo-booth',
+    iconName: 'Camera',
+    badge: 'Trending',
+    keywords: ['ai photo booth', 'online photobooth', 'vintage photo strip maker', 'retro photobooth online', 'free photo booth frames'],
+    metaTitle: 'Free AI Photo Booth Online – Vintage, Retro & Strip Frames | Vyopic',
+    metaDescription: 'Experience an online AI photo booth with Vintage, Retro, Passport, Funny, and Artistic themes. Customize borders, frames, and download photo strips.',
+    features: [
+      '7 Signature Styles: Vintage, Passport, Professional, Funny, Cartoon, Retro, Artistic',
+      'Classic 3-in-1 photobooth strip & polaroid border options',
+      'Date stamp, stickers, and grain texture overlays',
+      'High-resolution multi-frame export'
+    ],
+    faqs: [
+      {
+        question: 'Can I create vertical photo strips like physical booths?',
+        answer: 'Yes! Select the Classic Strip layout to generate vertical photo strips complete with vintage borders and date stamps.'
+      }
+    ]
+  },
+  {
+    id: 'ai-poster-maker',
+    title: 'AI Social Media Poster Maker',
+    shortDescription: 'Design eye-catching social media posters, banners & story flyers.',
+    fullDescription: 'Create viral posters, announcements, and marketing flyers in minutes. Preset standard dimensions for Facebook, Instagram Post/Story, YouTube Thumbnails, and Web Banners with custom text, branding, and layouts.',
+    path: '/ai-poster-maker',
+    iconName: 'LayoutTemplate',
+    badge: 'Design',
+    keywords: ['social media poster maker', 'ai poster maker', 'instagram story flyer maker', 'youtube thumbnail maker', 'facebook post design online'],
+    metaTitle: 'Free AI Social Media Poster Maker – Instagram, Facebook & YouTube | Vyopic',
+    metaDescription: 'Design stunning social media posters, flyers, and banners with customizable text, badges, photo overlays, and standard platform presets.',
+    features: [
+      'Platform Dimensions: Facebook Post, Instagram Post, Instagram Story, YouTube Thumbnail, Banner',
+      'Custom typography with editable colors, shadow, font scale & position',
+      'Logo & brand sticker overlay support',
+      'Live visual preview with PNG & JPG high-res downloads'
+    ],
+    faqs: [
+      {
+        question: 'What social media dimensions are supported?',
+        answer: 'Presets include Facebook Post (1200x630), Instagram Post (1080x1080), Instagram Story (1080x1920), YouTube Thumbnail (1280x720), and Banner (1200x500).'
+      }
+    ]
   }
 ];

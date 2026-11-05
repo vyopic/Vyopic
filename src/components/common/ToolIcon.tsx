@@ -20,6 +20,10 @@ import {
   Smile,
   Info,
   QrCode,
+  User,
+  Pencil,
+  Camera,
+  LayoutTemplate,
   Image as ImageIcon
 } from 'lucide-react';
 
@@ -70,6 +74,14 @@ export const ToolIcon: React.FC<ToolIconProps> = ({ name, className = 'w-6 h-6' 
       return <Info className={className} />;
     case 'QrCode':
       return <QrCode className={className} />;
+    case 'User':
+      return <User className={className} />;
+    case 'Pencil':
+      return <Pencil className={className} />;
+    case 'Camera':
+      return <Camera className={className} />;
+    case 'LayoutTemplate':
+      return <LayoutTemplate className={className} />;
     default:
       return <ImageIcon className={className} />;
   }

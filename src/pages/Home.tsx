@@ -146,14 +146,14 @@ export const Home: React.FC = () => {
         {/* 2. AD SPACE AFTER POPULAR TOOLS */}
         <AdSenseSlot slotId="home-mid-popular-ad" label="Advertisement" />
 
-        {/* ALL 20 TOOLS GRID */}
+        {/* ALL TOOLS GRID */}
         <section id="all-tools">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-2">
-              All 20 Free Online Photo Tools
+              All {TOOLS.length} Free Online Photo Tools
             </h2>
             <p className="text-slate-600 text-sm">
-              Complete suit of browser-based utilities for photographers, social media creators, students, and businesses.
+              Complete suite of browser-based utilities for photographers, creators, designers, students, and businesses.
             </p>
           </div>
 

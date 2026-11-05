@@ -28,6 +28,12 @@ import { MemeGeneratorPage } from './pages/MemeGenerator';
 import { ImageMetadataPage } from './pages/ImageMetadata';
 import { QrCodeGeneratorPage } from './pages/QrCodeGenerator';
 
+// 4 New Features
+import { AIProfilePicturePage } from './pages/AIProfilePicture';
+import { PhotoToSketchPage } from './pages/PhotoToSketch';
+import { AIPhotoBoothPage } from './pages/AIPhotoBooth';
+import { AISocialMediaPosterPage } from './pages/AISocialMediaPoster';
+
 // Legal & Info Pages
 import { AboutPage } from './pages/About';
 import { ContactPage } from './pages/Contact';
@@ -79,6 +85,12 @@ export default function App() {
             <Route path="/image-metadata" element={<ImageMetadataPage />} />
             <Route path="/qr-code-generator" element={<QrCodeGeneratorPage />} />
             <Route path="/qr-code-generato" element={<QrCodeGeneratorPage />} />
+
+            {/* 4 New Features */}
+            <Route path="/ai-profile-picture" element={<AIProfilePicturePage />} />
+            <Route path="/photo-to-sketch" element={<PhotoToSketchPage />} />
+            <Route path="/ai-photo-booth" element={<AIPhotoBoothPage />} />
+            <Route path="/ai-poster-maker" element={<AISocialMediaPosterPage />} />
 
             {/* Legal Pages */}
             <Route path="/about" element={<AboutPage />} />
