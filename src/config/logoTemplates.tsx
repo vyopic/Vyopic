@@ -1,6 +1,8 @@
 import React from 'react';
+import { CONCEPT_LOGO_TEMPLATES } from './conceptLogoTemplates';
 
 export type LogoCategory =
+  | 'Brand Concepts'
   | 'Minimal'
   | 'Lettermark'
   | 'Luxury'
@@ -21,11 +23,18 @@ export interface LogoTemplate {
   defaultFont: string;
   shape: 'square' | 'circle' | 'horizontal' | 'emblem';
   renderGraphic: (color: string, accent: string) => React.ReactNode;
-  layout: 'top-icon' | 'left-icon' | 'badge' | 'stacked' | 'framed' | 'lettermark';
+  layout: 'top-icon' | 'left-icon' | 'badge' | 'stacked' | 'framed' | 'lettermark' | 'custom-style';
+  renderCustomLogo?: (
+    brandName: string,
+    tagline: string,
+    colors: { primary: string; accent: string; bg: string },
+    options?: { isTransparent?: boolean; scale?: number }
+  ) => React.ReactNode;
 }
 
-// 50 Handcrafted Unique Logo Templates
+// 19 Concepts from uploaded designs + 50 Handcrafted Unique Logo Templates
 export const LOGO_TEMPLATES: LogoTemplate[] = [
+  ...CONCEPT_LOGO_TEMPLATES,
   // ─── 1. MINIMAL LOGO (6 TEMPLATES) ──────────────────────────
   {
     id: 'min-1',

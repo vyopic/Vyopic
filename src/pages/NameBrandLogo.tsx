@@ -41,6 +41,7 @@ interface EditorState {
   iconScale: number; // 0.6 to 1.5
   borderShape: 'none' | 'circle' | 'rounded' | 'square' | 'shield';
   borderWidth: number;
+  includeVyopicLink: boolean;
 }
 
 export const NameBrandLogoPage: React.FC = () => {
@@ -55,9 +56,9 @@ export const NameBrandLogoPage: React.FC = () => {
     brandName: 'VYOPIC',
     tagline: 'SMART PHOTO STUDIO',
     template: LOGO_TEMPLATES[0],
-    primaryColor: '#0f172a',
+    primaryColor: LOGO_TEMPLATES[0].defaultColor,
     accentColor: '#2563eb',
-    backgroundColor: '#ffffff',
+    backgroundColor: LOGO_TEMPLATES[0].defaultBg,
     isTransparent: false,
     fontFamily: 'font-sans font-black',
     fontSize: 48,
@@ -65,7 +66,8 @@ export const NameBrandLogoPage: React.FC = () => {
     alignment: 'center',
     iconScale: 1.0,
     borderShape: 'none',
-    borderWidth: 0
+    borderWidth: 0,
+    includeVyopicLink: true
   };
 
   const [state, setState] = useState<EditorState>(defaultState);
@@ -113,7 +115,8 @@ export const NameBrandLogoPage: React.FC = () => {
       ...defaultState,
       template: state.template,
       primaryColor: state.template.defaultColor,
-      backgroundColor: state.template.defaultBg
+      backgroundColor: state.template.defaultBg,
+      isTransparent: false
     }));
   };
 
@@ -122,13 +125,15 @@ export const NameBrandLogoPage: React.FC = () => {
       ...prev,
       template: t,
       primaryColor: t.defaultColor,
-      backgroundColor: t.defaultBg
+      backgroundColor: t.defaultBg,
+      isTransparent: false
     }));
   };
 
   // Filter templates
   const categories: string[] = [
     'All',
+    'Brand Concepts',
     'Minimal',
     'Lettermark',
     'Luxury',
@@ -205,7 +210,7 @@ export const NameBrandLogoPage: React.FC = () => {
         }
       }
 
-      // 3. Render graphic icon to an offscreen image
+      // 3. Render graphic / custom logo to an offscreen image
       const svgContainer = document.getElementById('vyopic-logo-svg-src');
       if (svgContainer) {
         const svgElement = svgContainer.querySelector('svg');
@@ -222,54 +227,99 @@ export const NameBrandLogoPage: React.FC = () => {
             iconImg.src = blobURL;
           });
 
-          // Draw icon according to layout
-          const isHorizontalLayout = W > H * 1.5;
-          const isLeftIcon = state.template.layout === 'left-icon' || isHorizontalLayout;
+          const isCustomStyle = state.template.layout === 'custom-style' || !!state.template.renderCustomLogo;
 
-          const baseIconDim = Math.min(W, H) * (isLeftIcon ? 0.45 : 0.32) * state.iconScale;
+          if (isCustomStyle) {
+            // Draw the entire custom styled SVG centered on the canvas
+            const padW = W * 0.06;
+            const padH = H * 0.08;
+            const targetW = W - padW * 2;
+            const targetH = H - padH * 2;
 
-          let iconX = (W - baseIconDim) / 2;
-          let iconY = H * 0.22 - baseIconDim / 2;
+            const naturalW = iconImg.naturalWidth || 500;
+            const naturalH = iconImg.naturalHeight || 350;
+            const imgAspect = naturalW / naturalH;
+            const targetAspect = targetW / targetH;
 
-          let textAnchorX = W / 2;
-          let textAnchorY = H * 0.62;
+            let drawW = targetW;
+            let drawH = targetH;
+            if (imgAspect > targetAspect) {
+              drawH = drawW / imgAspect;
+            } else {
+              drawW = drawH * imgAspect;
+            }
 
-          if (isLeftIcon) {
-            iconX = W * 0.15;
-            iconY = (H - baseIconDim) / 2;
-            textAnchorX = W * 0.58;
-            textAnchorY = H * 0.48;
-          }
+            const drawX = (W - drawW) / 2;
+            const drawY = (H - drawH) / 2;
+            ctx.drawImage(iconImg, drawX, drawY, drawW, drawH);
+            URLObj.revokeObjectURL(blobURL);
+          } else {
+            // Standard icon layout
+            const isHorizontalLayout = W > H * 1.5;
+            const isLeftIcon = state.template.layout === 'left-icon' || isHorizontalLayout;
 
-          ctx.drawImage(iconImg, iconX, iconY, baseIconDim, baseIconDim);
-          URLObj.revokeObjectURL(blobURL);
+            const baseIconDim = Math.min(W, H) * (isLeftIcon ? 0.45 : 0.32) * state.iconScale;
 
-          // 4. Render Brand Name & Tagline Text
-          const brandText = state.brandName.trim() || 'BRAND';
-          const calculatedFontSize = Math.max(
-            12,
-            Math.round(((state.fontSize * Math.min(W, H)) / 500) * (isLeftIcon ? 0.9 : 1))
-          );
+            let iconX = (W - baseIconDim) / 2;
+            let iconY = H * 0.22 - baseIconDim / 2;
 
-          ctx.textAlign = isLeftIcon ? 'left' : 'center';
-          ctx.fillStyle = state.primaryColor;
+            let textAnchorX = W / 2;
+            let textAnchorY = H * 0.62;
 
-          // Font mapping
-          let canvasFontFamily = 'Plus Jakarta Sans, sans-serif';
-          if (state.fontFamily.includes('serif')) canvasFontFamily = 'Georgia, serif';
-          if (state.fontFamily.includes('mono')) canvasFontFamily = 'Courier New, monospace';
+            if (isLeftIcon) {
+              iconX = W * 0.15;
+              iconY = (H - baseIconDim) / 2;
+              textAnchorX = W * 0.58;
+              textAnchorY = H * 0.48;
+            }
 
-          ctx.font = `bold ${calculatedFontSize}px ${canvasFontFamily}`;
-          ctx.fillText(brandText, textAnchorX, textAnchorY);
+            ctx.drawImage(iconImg, iconX, iconY, baseIconDim, baseIconDim);
+            URLObj.revokeObjectURL(blobURL);
 
-          // Tagline
-          if (state.tagline.trim()) {
-            const taglineSize = Math.max(9, Math.round(calculatedFontSize * 0.38));
-            ctx.font = `600 ${taglineSize}px ${canvasFontFamily}`;
-            ctx.fillStyle = state.accentColor;
-            ctx.fillText(state.tagline.toUpperCase(), textAnchorX, textAnchorY + calculatedFontSize * 0.7);
+            // 4. Render Brand Name & Tagline Text
+            const brandText = state.brandName.trim() || 'BRAND';
+            const calculatedFontSize = Math.max(
+              12,
+              Math.round(((state.fontSize * Math.min(W, H)) / 500) * (isLeftIcon ? 0.9 : 1))
+            );
+
+            ctx.textAlign = isLeftIcon ? 'left' : 'center';
+            ctx.fillStyle = state.primaryColor;
+
+            // Font mapping
+            let canvasFontFamily = 'Plus Jakarta Sans, sans-serif';
+            if (state.fontFamily.includes('serif')) canvasFontFamily = 'Georgia, serif';
+            if (state.fontFamily.includes('mono')) canvasFontFamily = 'Courier New, monospace';
+
+            ctx.font = `bold ${calculatedFontSize}px ${canvasFontFamily}`;
+            ctx.fillText(brandText, textAnchorX, textAnchorY);
+
+            // Tagline
+            if (state.tagline.trim()) {
+              const taglineSize = Math.max(9, Math.round(calculatedFontSize * 0.38));
+              ctx.font = `600 ${taglineSize}px ${canvasFontFamily}`;
+              ctx.fillStyle = state.accentColor;
+              ctx.fillText(state.tagline.toUpperCase(), textAnchorX, textAnchorY + calculatedFontSize * 0.7);
+            }
           }
         }
+      }
+
+      // 5. Draw discreet Vyopic link at the bottom of the downloaded logo
+      if (state.includeVyopicLink) {
+        const linkText = 'vyopic.pages.dev';
+        const linkFontSize = Math.max(10, Math.round(W * 0.024));
+        ctx.font = `600 ${linkFontSize}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.textAlign = 'center';
+
+        const isDark =
+          state.backgroundColor === '#080811' ||
+          state.backgroundColor === '#000000' ||
+          state.backgroundColor === '#0f172a' ||
+          state.backgroundColor === '#18181b';
+
+        ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.45)' : 'rgba(15, 23, 42, 0.4)';
+        ctx.fillText(linkText, W / 2, H - Math.round(H * 0.035));
       }
 
       const mimeType = exportFormat === 'jpg' ? 'image/jpeg' : 'image/png';
@@ -295,7 +345,7 @@ export const NameBrandLogoPage: React.FC = () => {
               <Crown className="w-5 h-5 text-blue-600" />
               <h2 className="text-base font-bold text-slate-900">Name Brand Logo Generator</h2>
               <span className="text-xs bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded-full">
-                50 Ready Templates
+                69 Templates (19 Concepts + 50 Presets)
               </span>
             </div>
 
@@ -473,7 +523,7 @@ export const NameBrandLogoPage: React.FC = () => {
 
             {/* The Logo Preview Stage */}
             <div
-              className={`w-full max-w-md aspect-square rounded-3xl border border-slate-200/80 flex flex-col items-center justify-center p-8 transition-all relative overflow-hidden shadow-inner ${
+              className={`w-full max-w-md aspect-square rounded-3xl border border-slate-200/80 flex flex-col items-center justify-center p-6 transition-all relative overflow-hidden shadow-inner ${
                 state.isTransparent
                   ? 'bg-[repeating-conic-gradient(#cbd5e1_0%_25%,#f1f5f9_0%_50%)_50%/16px_16px]'
                   : ''
@@ -500,40 +550,81 @@ export const NameBrandLogoPage: React.FC = () => {
                 />
               )}
 
-              {/* Graphic Icon Source for SVG serialization */}
-              <div
-                id="vyopic-logo-svg-src"
-                className="flex items-center justify-center transition-transform mb-3"
-                style={{ transform: `scale(${state.iconScale})` }}
-              >
-                {state.template.renderGraphic(state.primaryColor, state.accentColor)}
-              </div>
-
-              {/* Brand Typography */}
-              <div className={`text-center max-w-full px-4 ${state.fontFamily}`}>
-                <h1
-                  className="font-black tracking-wider uppercase transition-colors break-words leading-tight"
-                  style={{
-                    color: state.primaryColor,
-                    fontSize: `${Math.max(16, state.fontSize * 0.65)}px`,
-                    letterSpacing: `${state.letterSpacing}px`
-                  }}
+              {/* Conditional render: Custom Style Template vs Standard Graphic + Text */}
+              {state.template.renderCustomLogo ? (
+                <div
+                  id="vyopic-logo-svg-src"
+                  className="w-full h-full flex items-center justify-center transition-transform p-2"
+                  style={{ transform: `scale(${state.iconScale})` }}
                 >
-                  {state.brandName.trim() || 'BRAND NAME'}
-                </h1>
+                  {state.template.renderCustomLogo(
+                    state.brandName,
+                    state.tagline,
+                    {
+                      primary: state.primaryColor,
+                      accent: state.accentColor,
+                      bg: state.backgroundColor
+                    },
+                    { isTransparent: state.isTransparent, scale: state.iconScale }
+                  )}
+                </div>
+              ) : (
+                <>
+                  {/* Graphic Icon Source for SVG serialization */}
+                  <div
+                    id="vyopic-logo-svg-src"
+                    className="flex items-center justify-center transition-transform mb-3"
+                    style={{ transform: `scale(${state.iconScale})` }}
+                  >
+                    {state.template.renderGraphic(state.primaryColor, state.accentColor)}
+                  </div>
 
-                {state.tagline.trim() && (
-                  <p
-                    className="font-semibold tracking-widest uppercase transition-colors mt-1.5 opacity-90"
+                  {/* Brand Typography */}
+                  <div className={`text-center max-w-full px-4 ${state.fontFamily}`}>
+                    <h1
+                      className="font-black tracking-wider uppercase transition-colors break-words leading-tight"
+                      style={{
+                        color: state.primaryColor,
+                        fontSize: `${Math.max(16, state.fontSize * 0.65)}px`,
+                        letterSpacing: `${state.letterSpacing}px`
+                      }}
+                    >
+                      {state.brandName.trim() || 'BRAND NAME'}
+                    </h1>
+
+                    {state.tagline.trim() && (
+                      <p
+                        className="font-semibold tracking-widest uppercase transition-colors mt-1.5 opacity-90"
+                        style={{
+                          color: state.accentColor,
+                          fontSize: `${Math.max(10, state.fontSize * 0.25)}px`
+                        }}
+                      >
+                        {state.tagline}
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {/* Bottom discreet link indicator in live preview */}
+              {state.includeVyopicLink && (
+                <div className="absolute bottom-2.5 left-0 right-0 text-center pointer-events-none select-none">
+                  <span
+                    className="text-[10px] font-bold tracking-wider opacity-60"
                     style={{
-                      color: state.accentColor,
-                      fontSize: `${Math.max(10, state.fontSize * 0.25)}px`
+                      color:
+                        state.backgroundColor === '#080811' ||
+                        state.backgroundColor === '#000000' ||
+                        state.backgroundColor === '#0f172a'
+                          ? '#94a3b8'
+                          : '#64748b'
                     }}
                   >
-                    {state.tagline}
-                  </p>
-                )}
-              </div>
+                    vyopic.pages.dev
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -603,6 +694,22 @@ export const NameBrandLogoPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Vyopic Link Bottom Watermark Option */}
+            <div className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200/90 rounded-2xl">
+              <div>
+                <p className="text-xs font-bold text-slate-800">Add Vyopic Link to Download</p>
+                <p className="text-[11px] text-slate-500">Includes subtle vyopic.pages.dev credit at bottom</p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={state.includeVyopicLink}
+                  onChange={(e) => updateState((p) => ({ ...p, includeVyopicLink: e.target.checked }))}
+                  className="w-4 h-4 accent-blue-600 rounded cursor-pointer"
+                />
+              </label>
+            </div>
+
             {/* Download CTA Button */}
             <button
               onClick={handleDownload}
@@ -618,7 +725,7 @@ export const NameBrandLogoPage: React.FC = () => {
             </button>
 
             <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 font-medium">
-              <span>✓ No Watermark</span>
+              <span>✓ Instant HD Vector Export</span>
               <span>•</span>
               <span>✓ 100% Free Forever</span>
               <span>•</span>
@@ -627,16 +734,16 @@ export const NameBrandLogoPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 50 TEMPLATES GALLERY SECTION */}
+        {/* 69 TEMPLATES GALLERY SECTION */}
         <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div>
               <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-blue-600" />
-                Browse 50 Logo Templates
+                Browse Logo Templates & Concepts ({filteredTemplates.length})
               </h3>
               <p className="text-xs text-slate-500">
-                Click any template to instantly load and customize it with your brand name.
+                Type your brand name above — all logo templates update in real-time. Click any style to apply.
               </p>
             </div>
 
@@ -647,7 +754,7 @@ export const NameBrandLogoPage: React.FC = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search 50 templates..."
+                placeholder="Search templates or styles..."
                 className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-500"
               />
             </div>
@@ -655,55 +762,89 @@ export const NameBrandLogoPage: React.FC = () => {
 
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-1.5">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-blue-600 text-white shadow-2xs'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const isBrandConcepts = cat === 'Brand Concepts';
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    selectedCategory === cat
+                      ? 'bg-blue-600 text-white shadow-2xs'
+                      : isBrandConcepts
+                      ? 'bg-amber-100 text-amber-900 hover:bg-amber-200 border border-amber-300'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {isBrandConcepts && <Crown className="w-3.5 h-3.5 text-amber-600" />}
+                  <span>{cat}</span>
+                  {isBrandConcepts && (
+                    <span className="text-[10px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-extrabold">
+                      19
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
 
-          {/* 50 Templates Grid */}
+          {/* Templates Grid with Live Name Updating */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {filteredTemplates.map((t) => (
               <div
                 key={t.id}
                 onClick={() => selectTemplate(t)}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col items-center justify-between group text-center ${
+                className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col items-center justify-between group text-center ${
                   state.template.id === t.id
                     ? 'border-blue-600 ring-2 ring-blue-600/30 bg-blue-50/20 shadow-md'
                     : 'border-slate-200 bg-slate-50/50 hover:border-blue-500 hover:bg-white hover:shadow-md'
                 }`}
               >
                 {/* Badge Category */}
-                <div className="w-full flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="w-full flex items-center justify-between mb-1.5">
+                  <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md ${
+                    t.category === 'Brand Concepts' ? 'bg-amber-100 text-amber-800' : 'text-slate-400 bg-slate-100'
+                  }`}>
                     {t.category}
                   </span>
                   {state.template.id === t.id && (
-                    <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px]">
+                    <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
                       ✓
                     </span>
                   )}
                 </div>
 
-                {/* SVG Icon Graphic */}
-                <div className="w-16 h-16 flex items-center justify-center my-3 transition-transform group-hover:scale-110">
-                  {t.renderGraphic(
-                    state.template.id === t.id ? state.primaryColor : t.defaultColor,
-                    state.template.id === t.id ? state.accentColor : '#2563eb'
+                {/* SVG Live Graphic / Dynamic Styled Logo */}
+                <div className="w-full h-24 flex items-center justify-center my-1.5 transition-transform group-hover:scale-105 overflow-hidden">
+                  {t.renderCustomLogo ? (
+                    <div className="w-full h-full flex items-center justify-center pointer-events-none p-1">
+                      {t.renderCustomLogo(
+                        state.brandName || 'VYOPIC',
+                        '',
+                        {
+                          primary: state.template.id === t.id ? state.primaryColor : t.defaultColor,
+                          accent: state.template.id === t.id ? state.accentColor : '#2563eb',
+                          bg: state.template.id === t.id ? state.backgroundColor : t.defaultBg
+                        }
+                      )}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="w-12 h-12 flex items-center justify-center mb-1">
+                        {t.renderGraphic(
+                          state.template.id === t.id ? state.primaryColor : t.defaultColor,
+                          state.template.id === t.id ? state.accentColor : '#2563eb'
+                        )}
+                      </div>
+                      <span className="text-[11px] font-black tracking-wider text-slate-800 truncate max-w-[110px]">
+                        {state.brandName || 'VYOPIC'}
+                      </span>
+                    </div>
                   )}
                 </div>
 
                 {/* Template Name & Action */}
-                <div className="w-full pt-2 border-t border-slate-200/60 mt-1">
+                <div className="w-full pt-1.5 border-t border-slate-200/60 mt-1">
                   <p className="text-xs font-bold text-slate-800 truncate group-hover:text-blue-600 transition-colors">
                     {t.name}
                   </p>
