@@ -2,6 +2,48 @@ import { ToolItem } from '../types';
 
 export const TOOLS: ToolItem[] = [
   {
+    id: 'ai-cartoon-avatar',
+    title: 'AI Cartoon Avatar Maker',
+    shortDescription: 'Transform your photos into 6 stunning cartoon avatar styles with Cloudflare Workers AI.',
+    fullDescription: 'Convert your selfies and portraits into eye-catching cartoon avatars using Cloudflare Workers AI and FLUX.2 Klein 4B. Choose from 6 artistic styles: Cute Cartoon, Hand Drawn, Cool Sunglasses, Glasses Avatar, Anime Illustration, and Minimalist Portrait with instant before & after preview.',
+    path: '/ai-cartoon-avatar',
+    iconName: 'Wand2',
+    badge: 'New AI',
+    keywords: [
+      'ai cartoon avatar maker',
+      'cartoon photo maker',
+      'cloudflare workers ai avatar',
+      'flux 2 klein 4b avatar',
+      'photo to cartoon',
+      'anime avatar generator',
+      'avatar maker free'
+    ],
+    metaTitle: 'Free AI Cartoon Avatar Maker – FLUX.2 Klein 4B | Vyopic',
+    metaDescription: 'Transform your photos into 6 unique cartoon avatar styles with Cloudflare Workers AI FLUX.2 Klein 4B. 100% free with interactive before/after preview & HD download.',
+    features: [
+      'Powered by Cloudflare Workers AI (@cf/black-forest-labs/flux-2-klein-4b)',
+      '6 Handcrafted Styles: Cute Cartoon, Hand Drawn, Cool Sunglasses, Glasses Avatar, Anime & Minimalist',
+      'Interactive Before & After slider comparison',
+      'Instant Drag & Drop photo upload up to 5MB with auto 512×512 optimization',
+      'High-resolution PNG download with commercial readiness',
+      'Ultra-fast 4-step neural distilled inference'
+    ],
+    faqs: [
+      {
+        question: 'Which AI model powers the cartoon avatar generator?',
+        answer: 'It is powered by Cloudflare Workers AI using the Black Forest Labs FLUX.2 Klein 4B distilled model (@cf/black-forest-labs/flux-2-klein-4b).'
+      },
+      {
+        question: 'What avatar styles are available?',
+        answer: 'You can choose between Hand Drawn Cartoon, Cute Cartoon, Cool Sunglasses, Glasses Avatar, Anime Illustration, and Minimalist Portrait.'
+      },
+      {
+        question: 'Is it free to generate and download avatars?',
+        answer: 'Yes! All cartoon avatars created on Vyopic are completely free to preview and download in high-resolution PNG format.'
+      }
+    ]
+  },
+  {
     id: 'name-brand-logo',
     title: 'Name Brand Logo Maker',
     shortDescription: 'Create professional brand logos with 50 customizable templates in 16 sizes.',

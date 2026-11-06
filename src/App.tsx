@@ -34,6 +34,7 @@ import { AIProfilePicturePage } from './pages/AIProfilePicture';
 import { PhotoToSketchPage } from './pages/PhotoToSketch';
 import { AIPhotoBoothPage } from './pages/AIPhotoBooth';
 import { AISocialMediaPosterPage } from './pages/AISocialMediaPoster';
+import { AICartoonAvatarPage } from './pages/AICartoonAvatar';
 
 // Legal & Info Pages
 import { AboutPage } from './pages/About';
@@ -61,6 +62,7 @@ export default function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/ai-cartoon-avatar" element={<AICartoonAvatarPage />} />
             <Route path="/name-brand-logo" element={<NameBrandLogoPage />} />
             
             {/* First 10 Tools */}
