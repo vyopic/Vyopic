@@ -13,7 +13,9 @@ import {
   Search,
   Eye,
   Layers,
-  Maximize2
+  Maximize2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { TOOLS } from '../config/tools';
 import { ToolLayout } from '../components/common/ToolLayout';
@@ -83,6 +85,16 @@ export const NameBrandLogoPage: React.FC = () => {
 
   // Preview canvas ref for export
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Horizontal template carousel slider ref
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollSlider = (direction: 'left' | 'right') => {
+    if (sliderRef.current) {
+      const scrollAmount = direction === 'left' ? -380 : 380;
+      sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   // Push state to history
   const updateState = (updater: (prev: EditorState) => EditorState) => {
@@ -507,15 +519,185 @@ export const NameBrandLogoPage: React.FC = () => {
           </div>
         </div>
 
-        {/* WORKSPACE & LIVE PREVIEW HERO */}
+        {/* 1. HORIZONTAL SLIDING TEMPLATES CAROUSEL (ডানে বামে স্লাইড করে টেম্পলেট চুজ করার সিস্টেম) */}
+        <section className="bg-white rounded-3xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shadow-2xs">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+                  <span>Choose Logo Template</span>
+                  <span className="text-xs bg-blue-100 text-blue-700 font-bold px-2.5 py-0.5 rounded-full">
+                    {filteredTemplates.length} Styles
+                  </span>
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Slide left & right (ডানে-বামে স্লাইড করুন) to explore styles. Real-time text preview enabled.
+                </p>
+              </div>
+            </div>
+
+            {/* Search & Slider Navigation Controls */}
+            <div className="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end">
+              {/* Search Input Box */}
+              <div className="relative w-full md:w-56">
+                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search templates or styles..."
+                  className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-500"
+                />
+              </div>
+
+              {/* Left & Right Slide Buttons */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => scrollSlider('left')}
+                  className="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-700 transition-all shadow-2xs active:scale-95 flex items-center justify-center border border-slate-200"
+                  title="Slide Left (বাম দিকে স্লাইড)"
+                  aria-label="Slide Left"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollSlider('right')}
+                  className="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-700 transition-all shadow-2xs active:scale-95 flex items-center justify-center border border-slate-200"
+                  title="Slide Right (ডান দিকে স্লাইড)"
+                  aria-label="Slide Right"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+            {categories.map((cat) => {
+              const isBrandConcepts = cat === 'Brand Concepts';
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
+                    selectedCategory === cat
+                      ? 'bg-blue-600 text-white shadow-2xs'
+                      : isBrandConcepts
+                      ? 'bg-amber-100 text-amber-900 hover:bg-amber-200 border border-amber-300'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {isBrandConcepts && <Crown className="w-3.5 h-3.5 text-amber-600" />}
+                  <span>{cat}</span>
+                  {isBrandConcepts && (
+                    <span className="text-[10px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-extrabold">
+                      19
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Horizontal Sliding Carousel Track */}
+          <div
+            ref={sliderRef}
+            className="flex items-stretch gap-3.5 overflow-x-auto py-2.5 px-1 scroll-smooth snap-x snap-mandatory focus:outline-none"
+            style={{
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#cbd5e1 transparent'
+            }}
+          >
+            {filteredTemplates.map((t) => (
+              <div
+                key={t.id}
+                onClick={() => selectTemplate(t)}
+                className={`min-w-[175px] max-w-[175px] sm:min-w-[195px] sm:max-w-[195px] p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col items-center justify-between group text-center shrink-0 snap-start select-none ${
+                  state.template.id === t.id
+                    ? 'border-blue-600 ring-2 ring-blue-600/30 bg-blue-50/20 shadow-md scale-[1.02]'
+                    : 'border-slate-200 bg-slate-50/60 hover:border-blue-400 hover:bg-white hover:shadow-md'
+                }`}
+              >
+                {/* Badge Category & Selected Mark */}
+                <div className="w-full flex items-center justify-between mb-1.5">
+                  <span
+                    className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md truncate max-w-[120px] ${
+                      t.category === 'Brand Concepts' ? 'bg-amber-100 text-amber-800' : 'text-slate-400 bg-slate-100'
+                    }`}
+                  >
+                    {t.category}
+                  </span>
+                  {state.template.id === t.id && (
+                    <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                      ✓
+                    </span>
+                  )}
+                </div>
+
+                {/* SVG Graphic / Dynamic Styled Logo with Live Brand Name */}
+                <div className="w-full h-20 flex items-center justify-center my-1.5 transition-transform group-hover:scale-105 overflow-hidden">
+                  {t.renderCustomLogo ? (
+                    <div className="w-full h-full flex items-center justify-center pointer-events-none p-1">
+                      {t.renderCustomLogo(
+                        state.brandName || 'VYOPIC',
+                        '',
+                        {
+                          primary: state.template.id === t.id ? state.primaryColor : t.defaultColor,
+                          accent: state.template.id === t.id ? state.accentColor : '#2563eb',
+                          bg: state.template.id === t.id ? state.backgroundColor : t.defaultBg
+                        }
+                      )}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="w-10 h-10 flex items-center justify-center mb-1">
+                        {t.renderGraphic(
+                          state.template.id === t.id ? state.primaryColor : t.defaultColor,
+                          state.template.id === t.id ? state.accentColor : '#2563eb'
+                        )}
+                      </div>
+                      <span className="text-[10px] font-black tracking-wider text-slate-800 truncate max-w-[130px]">
+                        {state.brandName || 'VYOPIC'}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Template Name */}
+                <div className="w-full pt-1.5 border-t border-slate-200/60 mt-0.5">
+                  <p className="text-xs font-bold text-slate-800 truncate group-hover:text-blue-600 transition-colors">
+                    {t.name}
+                  </p>
+                  <span className="text-[10px] font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Select Style →
+                  </span>
+                </div>
+              </div>
+            ))}
+
+            {filteredTemplates.length === 0 && (
+              <div className="p-8 text-center text-slate-400 text-xs w-full">
+                No templates found matching "{searchQuery}".
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* 2. OUTPUT LOGO CARD & DOWNLOAD CONTROLS (টেম্পলেটের নিচে) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Main Interactive Preview Card */}
+          {/* Main Output Logo Preview Card */}
           <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs flex flex-col items-center">
             <div className="w-full flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-bold text-slate-700">
-                  Live Preview • {state.template.name} ({state.template.category})
+                  Output Logo Preview • {state.template.name} ({state.template.category})
                 </span>
               </div>
               <span className="text-[11px] text-slate-400 font-medium">100% Vector Precision</span>
@@ -733,135 +915,6 @@ export const NameBrandLogoPage: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* 69 TEMPLATES GALLERY SECTION */}
-        <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-            <div>
-              <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-blue-600" />
-                Browse Logo Templates & Concepts ({filteredTemplates.length})
-              </h3>
-              <p className="text-xs text-slate-500">
-                Type your brand name above — all logo templates update in real-time. Click any style to apply.
-              </p>
-            </div>
-
-            {/* Search Input Box */}
-            <div className="relative w-full md:w-72">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search templates or styles..."
-                className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-blue-500"
-              />
-            </div>
-          </div>
-
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-1.5">
-            {categories.map((cat) => {
-              const isBrandConcepts = cat === 'Brand Concepts';
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                    selectedCategory === cat
-                      ? 'bg-blue-600 text-white shadow-2xs'
-                      : isBrandConcepts
-                      ? 'bg-amber-100 text-amber-900 hover:bg-amber-200 border border-amber-300'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {isBrandConcepts && <Crown className="w-3.5 h-3.5 text-amber-600" />}
-                  <span>{cat}</span>
-                  {isBrandConcepts && (
-                    <span className="text-[10px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-extrabold">
-                      19
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Templates Grid with Live Name Updating */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {filteredTemplates.map((t) => (
-              <div
-                key={t.id}
-                onClick={() => selectTemplate(t)}
-                className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col items-center justify-between group text-center ${
-                  state.template.id === t.id
-                    ? 'border-blue-600 ring-2 ring-blue-600/30 bg-blue-50/20 shadow-md'
-                    : 'border-slate-200 bg-slate-50/50 hover:border-blue-500 hover:bg-white hover:shadow-md'
-                }`}
-              >
-                {/* Badge Category */}
-                <div className="w-full flex items-center justify-between mb-1.5">
-                  <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md ${
-                    t.category === 'Brand Concepts' ? 'bg-amber-100 text-amber-800' : 'text-slate-400 bg-slate-100'
-                  }`}>
-                    {t.category}
-                  </span>
-                  {state.template.id === t.id && (
-                    <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
-                      ✓
-                    </span>
-                  )}
-                </div>
-
-                {/* SVG Live Graphic / Dynamic Styled Logo */}
-                <div className="w-full h-24 flex items-center justify-center my-1.5 transition-transform group-hover:scale-105 overflow-hidden">
-                  {t.renderCustomLogo ? (
-                    <div className="w-full h-full flex items-center justify-center pointer-events-none p-1">
-                      {t.renderCustomLogo(
-                        state.brandName || 'VYOPIC',
-                        '',
-                        {
-                          primary: state.template.id === t.id ? state.primaryColor : t.defaultColor,
-                          accent: state.template.id === t.id ? state.accentColor : '#2563eb',
-                          bg: state.template.id === t.id ? state.backgroundColor : t.defaultBg
-                        }
-                      )}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center">
-                      <div className="w-12 h-12 flex items-center justify-center mb-1">
-                        {t.renderGraphic(
-                          state.template.id === t.id ? state.primaryColor : t.defaultColor,
-                          state.template.id === t.id ? state.accentColor : '#2563eb'
-                        )}
-                      </div>
-                      <span className="text-[11px] font-black tracking-wider text-slate-800 truncate max-w-[110px]">
-                        {state.brandName || 'VYOPIC'}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Template Name & Action */}
-                <div className="w-full pt-1.5 border-t border-slate-200/60 mt-1">
-                  <p className="text-xs font-bold text-slate-800 truncate group-hover:text-blue-600 transition-colors">
-                    {t.name}
-                  </p>
-                  <span className="text-[10px] font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Apply Design →
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {filteredTemplates.length === 0 && (
-            <div className="p-12 text-center text-slate-400 text-sm">
-              No logo templates found matching "{searchQuery}". Try selecting "All".
-            </div>
-          )}
-        </section>
       </div>
     </ToolLayout>
   );
