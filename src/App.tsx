@@ -5,6 +5,7 @@ import { Footer } from './components/layout/Footer';
 
 // First 10 Core Pages
 import { Home } from './pages/Home';
+import { NameBrandLogoPage } from './pages/NameBrandLogo';
 import { ImageCompressorPage } from './pages/ImageCompressor';
 import { ImageResizerPage } from './pages/ImageResizer';
 import { ImageConverterPage } from './pages/ImageConverter';
@@ -60,6 +61,7 @@ export default function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/name-brand-logo" element={<NameBrandLogoPage />} />
             
             {/* First 10 Tools */}
             <Route path="/image-compressor" element={<ImageCompressorPage />} />

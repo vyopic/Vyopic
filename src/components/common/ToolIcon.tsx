@@ -24,6 +24,7 @@ import {
   Pencil,
   Camera,
   LayoutTemplate,
+  Crown,
   Image as ImageIcon
 } from 'lucide-react';
 
@@ -82,6 +83,8 @@ export const ToolIcon: React.FC<ToolIconProps> = ({ name, className = 'w-6 h-6' 
       return <Camera className={className} />;
     case 'LayoutTemplate':
       return <LayoutTemplate className={className} />;
+    case 'Crown':
+      return <Crown className={className} />;
     default:
       return <ImageIcon className={className} />;
   }

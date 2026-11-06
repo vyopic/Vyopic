@@ -2,6 +2,40 @@ import { ToolItem } from '../types';
 
 export const TOOLS: ToolItem[] = [
   {
+    id: 'name-brand-logo',
+    title: 'Name Brand Logo Maker',
+    shortDescription: 'Create professional brand logos with 50 customizable templates in 16 sizes.',
+    fullDescription: 'Design professional logos for your brand, business, gaming channel, or startup in seconds. Choose from 50 distinctive templates across 10 categories, customize typography, shapes, colors, and export watermark-free high-res PNGs and JPGs in 16 standard industry sizes.',
+    path: '/name-brand-logo',
+    iconName: 'Crown',
+    badge: 'Featured',
+    keywords: ['name brand logo maker', 'free logo generator', 'business logo maker', 'minimal logo design', 'gaming logo creator', 'brand identity designer'],
+    metaTitle: 'Free Name Brand Logo Maker – 50 Logo Templates & 16 Sizes | Vyopic',
+    metaDescription: 'Create custom brand logos online for free. 50 handcrafted templates in Minimal, Luxury, Gaming, Business, Vintage & Emblem styles. Export in 16 HD sizes with transparent PNG.',
+    features: [
+      '50 Distinct Handcrafted Templates across 10 Curated Categories',
+      'Real-time Name & Tagline auto-sizing generator',
+      'Full styling customization: Colors, Backgrounds, Fonts, Spacing, and Frames',
+      'Transparent background PNG and high-resolution JPG output',
+      '16 Standard Industry Sizes: Ultra HD (2048x2048), Favicon, Social, Website Header',
+      'History controls: Undo, Redo, and Reset design'
+    ],
+    faqs: [
+      {
+        question: 'Are the generated logos watermark-free?',
+        answer: 'Yes! All logos created with Vyopic are 100% free and exported without any watermarks or hidden fees.'
+      },
+      {
+        question: 'What sizes can I download my logo in?',
+        answer: 'You can export in 16 preset sizes including Favicon (32x32), Small (256x256), Standard (512x512), HD (1024x1024), Ultra HD (2048x2048), Website Header (800x300), and all social media profile sizes.'
+      },
+      {
+        question: 'Can I export a logo with a transparent background?',
+        answer: 'Yes! Simply toggle the "Transparent Background" option and download a clean PNG file.'
+      }
+    ]
+  },
+  {
     id: 'image-compressor',
     title: 'Image Compressor',
     shortDescription: 'Compress JPG, PNG & WebP images without losing quality in your browser.',
