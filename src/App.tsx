@@ -35,6 +35,7 @@ import { PhotoToSketchPage } from './pages/PhotoToSketch';
 import { AIPhotoBoothPage } from './pages/AIPhotoBooth';
 import { AISocialMediaPosterPage } from './pages/AISocialMediaPoster';
 import { AICartoonAvatarPage } from './pages/AICartoonAvatar';
+import { AIChatAssistantPage } from './pages/AIChatAssistant';
 
 // Legal & Info Pages
 import { AboutPage } from './pages/About';
@@ -62,6 +63,8 @@ export default function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/ai-chat" element={<AIChatAssistantPage />} />
+            <Route path="/chat" element={<AIChatAssistantPage />} />
             <Route path="/ai-cartoon-avatar" element={<AICartoonAvatarPage />} />
             <Route path="/name-brand-logo" element={<NameBrandLogoPage />} />
             

@@ -2,6 +2,48 @@ import { ToolItem } from '../types';
 
 export const TOOLS: ToolItem[] = [
   {
+    id: 'ai-chat-assistant',
+    title: 'AI Chat Assistant',
+    shortDescription: 'Chat with Vyopic AI powered by Groq API in Bengali and English for photography and smart advice.',
+    fullDescription: 'Experience conversational AI powered by Groq API (Llama 3.3 70B) via Cloudflare Pages Functions. Ask photo editing questions, get brand logo design tips, brainstorm captions, write and format code with real-time streaming, chat history, and dark mode.',
+    path: '/ai-chat',
+    iconName: 'Bot',
+    badge: 'New AI',
+    keywords: [
+      'ai chat assistant',
+      'groq ai chat',
+      'bengali ai chat',
+      'vyopic ai assistant',
+      'llama 3.3 70b',
+      'photo editing ai assistant',
+      'bangla ai chatbot'
+    ],
+    metaTitle: 'Free AI Chat Assistant – Groq Llama 3.3 70B | Vyopic',
+    metaDescription: 'Chat with Vyopic AI Assistant in Bengali and English powered by Groq API. Get instant photo editing advice, logo tips, and creative ideas with chat history & dark mode.',
+    features: [
+      'Powered by Groq API & Llama 3.3 70B via Cloudflare Pages Functions',
+      'Fluent Bilingual Conversation in Bengali (বাংলা) & English',
+      'Persistent Local Chat History across browser sessions',
+      'Real-time response streaming and stop generation controls',
+      'Rich Markdown formatting with dark code blocks & one-click copy',
+      'Dark and Light theme switcher with mobile-friendly design'
+    ],
+    faqs: [
+      {
+        question: 'Which AI model powers the Vyopic Chat Assistant?',
+        answer: 'It is powered by Groq API using Llama 3.3 70B Versatile, delivering ultra-fast, high-intelligence responses.'
+      },
+      {
+        question: 'Can I chat in Bengali (বাংলা)?',
+        answer: 'Yes! Vyopic AI is fully fluent in Bengali and English, understanding nuances, photo editing terms, and general queries in both languages.'
+      },
+      {
+        question: 'Is my chat history saved?',
+        answer: 'Yes, your conversations are saved locally in your browser storage so you can easily switch between chats or continue later.'
+      }
+    ]
+  },
+  {
     id: 'ai-cartoon-avatar',
     title: 'AI Cartoon Avatar Maker',
     shortDescription: 'Transform your photos into 6 stunning cartoon avatar styles with Cloudflare Workers AI.',

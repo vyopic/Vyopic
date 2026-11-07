@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ChevronDown, Sparkles, Menu, X, ShieldCheck } from 'lucide-react';
+import { Search, ChevronDown, Sparkles, Menu, X, ShieldCheck, Bot } from 'lucide-react';
 import { TOOLS } from '../../config/tools';
 import { LogoIconSVG } from '../common/Logo';
 
@@ -50,6 +50,17 @@ export const Header: React.FC = () => {
         <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700">
           <Link to="/" className="hover:text-blue-600 transition-colors py-2">
             Home
+          </Link>
+
+          <Link
+            to="/ai-chat"
+            className="hover:text-blue-600 transition-colors py-2 flex items-center gap-1.5 text-blue-600"
+          >
+            <Bot className="w-4 h-4 text-blue-600" />
+            <span>AI Chat</span>
+            <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full">
+              Groq
+            </span>
           </Link>
 
           {/* Tools Dropdown */}
@@ -158,6 +169,19 @@ export const Header: React.FC = () => {
               className="px-3 py-2 hover:bg-slate-50 rounded-xl"
             >
               Home
+            </Link>
+            <Link
+              to="/ai-chat"
+              onClick={() => setIsMenuOpen(false)}
+              className="px-3 py-2 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-between font-bold"
+            >
+              <span className="flex items-center gap-2">
+                <Bot className="w-4 h-4 text-blue-600" />
+                <span>AI Chat Assistant</span>
+              </span>
+              <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 bg-blue-600 text-white rounded-full">
+                Groq
+              </span>
             </Link>
             <Link
               to="/about"
